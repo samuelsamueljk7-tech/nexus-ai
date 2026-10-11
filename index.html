@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEXUS AI Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Existing Spark login from the previous build -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-grid"></div><div class="login-glow glow-a"></div><div class="login-glow glow-b"></div>
+  <div class="login-card">
+    <div class="login-brand"><div class="login-orb">✦</div><div><div class="login-wordmark">NEXUS</div><div class="login-tagline">YOUR AI ASSISTANT</div></div></div>
+    <div class="login-heading">Welcome back.</div>
+    <div class="login-subheading">Sign in to connect to your NEXUS intelligence core.</div>
+    <form id="loginForm" autocomplete="on">
+      <label for="loginEmail">EMAIL</label>
+      <div class="input-shell"><span>◉</span><input id="loginEmail" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+      <label for="loginPassword">PASSWORD</label>
+      <div class="input-shell"><span>⌑</span><input id="loginPassword" type="password" placeholder="Enter your password" autocomplete="current-password" required><button type="button" class="password-toggle" id="passwordToggle">SHOW</button></div>
+      <div class="login-options"><label class="remember"><input type="checkbox" id="rememberMe"><span>Remember me</span></label><button type="button" class="forgot" id="forgotButton">Forgot password?</button></div>
+      <button class="login-submit" type="submit"><span>ENTER NEXUS</span><span>→</span></button>
+      <div class="login-divider"><span>OR</span></div>
+      <button class="guest-button" type="button" id="guestButton">CONTINUE AS GUEST</button>
+    </form>
+    <div class="login-message" id="loginMessage"></div>
+    <div class="login-footer">SECURE LOCAL SESSION <span>•</span> NEXUS CORE</div>
+  </div>
+</div>
+
+<div class="app" id="app">
+  <div class="background-grid"></div>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+
+  <header class="topbar">
+    <div class="brand"><span class="brand-star">✦</span><span class="brand-name">NEXUS</span><span class="brand-badge">AI</span></div>
+    <div class="top-actions">
+      <div class="online"><span></span> ONLINE</div>
+      <button class="settings" id="settingsButton" aria-label="NEXUS settings">⚙</button>
+    </div>
+  </header>
+
+  <main class="hero">
+    <section class="assistant-stage" id="characterContainer">
+      <div class="orbital orbital-a"></div><div class="orbital orbital-b"></div><div class="orbital orbital-c"></div>
+      <div class="particle p1"></div><div class="particle p2"></div><div class="particle p3"></div><div class="particle p4"></div><div class="particle p5"></div><div class="particle p6"></div>
+      <div class="character-glow"></div>
+      <div class="spark-core" aria-label="Animated NEXUS robot face"><div class="robot-eyes"><i></i><i></i></div><div class="robot-mouth"></div><span></span></div>
+    </section>
+
+    <section class="assistant-copy">
+      <div class="eyebrow" id="eyebrow"></div>
+      <h1 id="status">Reminder</h1>
+      <p id="subtitle">I can help you remember</p>
+      <div class="response" id="response">Tell me what you'd like me to remind you about.</div>
+
+      <div class="quick-actions" id="quickActions">
+        <button data-command="What's the weather today?">☀️ <span>Weather</span></button>
+        <button data-command="Open Spotify and search for a song">♫ <span>Music</span></button>
+        <button data-command="Set a reminder for me">⏰ <span>Reminder</span></button>
+        <button data-command="What can you do?">✦ <span>What can you do?</span></button>
+      </div>
+    </section>
+  </main>
+
+  <div class="command-area">
+    <form id="commandForm" class="command-form">
+      <input id="commandInput" autocomplete="off" placeholder="Ask NEXUS anything…">
+      <button type="submit" aria-label="Send command">↑</button>
+    </form>
+  </div>
+
+  <footer class="bottom-bar">
+    <div class="mic-zone">
+      <div class="mic-halo"></div>
+      <button class="mic" id="micButton" aria-label="Talk to NEXUS">🎙</button>
+    </div>
+    <div class="mic-help"><span>Press <b>SPACE</b> to talk</span></div>
+    <button class="logout-button" id="logoutButton" aria-hidden="true" tabindex="-1">SIGN OUT</button>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

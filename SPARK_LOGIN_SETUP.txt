@@ -1,0 +1,21 @@
+SPARK LOGIN SETUP
+
+The Spark login screen is now integrated into the existing UI.
+
+Files changed:
+- index.html
+- style.css
+- script.js
+
+Behavior:
+- Email/password form opens the existing Spark UI.
+- "Continue as guest" opens the Spark UI.
+- Remember me persists the local session.
+- Sign out returns to the login screen.
+- Password visibility toggle included.
+
+IMPORTANT:
+This is a front-end login/session gate, not secure account authentication.
+For real user accounts, connect loginUser() in script.js to a backend
+authentication API and validate credentials server-side. Never store
+real passwords or API keys in this JavaScript.

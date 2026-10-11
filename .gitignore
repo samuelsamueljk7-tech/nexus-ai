@@ -1,0 +1,28 @@
+# Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python environments and cache
+.spark-venv/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local backups
+*.local-backup.py
+*.local-backup.txt
+server.local-backup.py
+spark_brain.local-backup.py
+requirements.local-backup.txt
+
+# OS and editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Logs
+*.log

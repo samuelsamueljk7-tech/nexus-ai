@@ -1,0 +1,1438 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>SPARK AI CORE</title>
+
+
+<style>
+
+/* ============================================================
+   RESET
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+
+    background:
+        radial-gradient(
+            circle at center,
+            #07394a 0%,
+            #031820 30%,
+            #010609 72%
+        );
+
+    color: #8beaff;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+}
+
+
+/* ============================================================
+   MOVING GRID
+   ============================================================ */
+
+.grid {
+
+    position: fixed;
+
+    inset: 0;
+
+    background-image:
+
+        linear-gradient(
+            rgba(0, 220, 255, 0.055) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(0, 220, 255, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size: 45px 45px;
+
+    animation:
+        gridMove 8s linear infinite;
+
+}
+
+@keyframes gridMove {
+
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(45px);
+    }
+
+}
+
+
+/* ============================================================
+   SCANLINE
+   ============================================================ */
+
+.scanline {
+
+    position: fixed;
+
+    left: 0;
+    right: 0;
+
+    height: 2px;
+
+    background:
+        rgba(90, 235, 255, 0.4);
+
+    box-shadow:
+        0 0 15px #20ddff;
+
+    animation:
+        scan 4s linear infinite;
+
+    pointer-events: none;
+
+}
+
+@keyframes scan {
+
+    from {
+        top: -5%;
+    }
+
+    to {
+        top: 105%;
+    }
+
+}
+
+
+/* ============================================================
+   TOP BAR
+   ============================================================ */
+
+.topbar {
+
+    position: absolute;
+
+    top: 25px;
+    left: 35px;
+    right: 35px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    letter-spacing: 4px;
+
+    font-size: 13px;
+
+}
+
+.logo {
+
+    font-size: 20px;
+
+    font-weight: 600;
+
+    text-shadow:
+        0 0 12px #21dcff;
+
+}
+
+.online {
+
+    color: #66ffbf;
+
+    text-shadow:
+        0 0 12px #66ffbf;
+
+}
+
+
+/* ============================================================
+   CORE AREA
+   ============================================================ */
+
+.core-area {
+
+    position: absolute;
+
+    top: 42%;
+    left: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+
+}
+
+
+/* ============================================================
+   CORE
+   ============================================================ */
+
+.core {
+
+    position: relative;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    border:
+        2px solid
+        rgba(120, 235, 255, 0.8);
+
+    box-shadow:
+
+        0 0 20px #1bdcff,
+
+        0 0 55px
+        rgba(20, 220, 255, 0.65),
+
+        inset 0 0 50px
+        rgba(20, 220, 255, 0.4);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    animation:
+        corePulse 2.5s infinite;
+
+}
+
+
+/* ============================================================
+   INNER CORE
+   ============================================================ */
+
+.core::before {
+
+    content: "";
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background:
+
+        radial-gradient(
+            circle,
+            #e9fdff 0%,
+            #56eaff 35%,
+            #0bbbdc 65%,
+            transparent 70%
+        );
+
+    box-shadow:
+
+        0 0 20px #36e7ff,
+
+        0 0 60px #18dfff,
+
+        0 0 100px
+        rgba(30, 220, 255, .7);
+
+    animation:
+        coreEnergy 1.2s infinite;
+
+}
+
+
+/* ============================================================
+   OUTER RING
+   ============================================================ */
+
+.core::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -28px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid
+        rgba(70, 225, 255, 0.3);
+
+    border-top-color:
+        #65eeff;
+
+    border-bottom-color:
+        #65eeff;
+
+    animation:
+        rotate 5s linear infinite;
+
+}
+
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+
+@keyframes corePulse {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.055);
+
+    }
+
+}
+
+@keyframes coreEnergy {
+
+    0%,
+    100% {
+
+        transform:
+            scale(.85);
+
+        opacity: .8;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.15);
+
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes rotate {
+
+    from {
+
+        transform:
+            rotate(0deg);
+
+    }
+
+    to {
+
+        transform:
+            rotate(360deg);
+
+    }
+
+}
+
+
+/* ============================================================
+   STARTUP MODE
+   ============================================================ */
+
+body.starting .core {
+
+    animation:
+        ignition 1s
+        ease-out forwards;
+
+}
+
+body.starting .core::before {
+
+    animation:
+        ignitionCore .8s
+        ease-out forwards;
+
+}
+
+@keyframes ignition {
+
+    0% {
+
+        transform:
+            scale(.1);
+
+        opacity: 0;
+
+    }
+
+    55% {
+
+        transform:
+            scale(1.18);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+@keyframes ignitionCore {
+
+    0% {
+
+        transform:
+            scale(.05);
+
+        opacity: 0;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.8);
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+
+/* ============================================================
+   SHUTDOWN MODE
+   ============================================================ */
+
+body.shutdown .core {
+
+    animation:
+        shutdown 1s
+        ease-in forwards;
+
+}
+
+@keyframes shutdown {
+
+    0% {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+    60% {
+
+        transform:
+            scale(1.2);
+
+        opacity: .8;
+
+    }
+
+    100% {
+
+        transform:
+            scale(.05);
+
+        opacity: 0;
+
+    }
+
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.title {
+
+    margin-top: 45px;
+
+    font-size: 34px;
+
+    letter-spacing: 12px;
+
+    text-shadow:
+        0 0 15px #29ddff;
+
+}
+
+
+/* ============================================================
+   STATUS
+   ============================================================ */
+
+.status {
+
+    margin-top: 15px;
+
+    font-size: 14px;
+
+    letter-spacing: 5px;
+
+}
+
+
+/* ============================================================
+   SIDE PANELS
+   ============================================================ */
+
+.panel {
+
+    position: absolute;
+
+    top: 50%;
+
+    transform:
+        translateY(-50%);
+
+    width: 270px;
+
+    padding: 25px;
+
+    background:
+        rgba(0, 18, 28, .55);
+
+    border:
+        1px solid
+        rgba(80, 220, 255, .28);
+
+    box-shadow:
+        0 0 30px
+        rgba(20, 200, 255, .08);
+
+    backdrop-filter:
+        blur(12px);
+
+}
+
+.left {
+    left: 35px;
+}
+
+.right {
+    right: 35px;
+}
+
+.panel-title {
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 25px;
+
+    opacity: .7;
+
+}
+
+.row {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin: 18px 0;
+
+    font-size: 12px;
+
+}
+
+.good {
+
+    color: #63ffbd;
+
+    text-shadow:
+        0 0 8px
+        rgba(99,255,189,.5);
+
+}
+
+.value {
+
+    max-width: 145px;
+
+    text-align: right;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+
+}
+
+
+/* ============================================================
+   PHONE CONTROL
+   ============================================================ */
+
+.phone-control {
+
+    position: fixed;
+
+    left: 50%;
+
+    bottom: 48px;
+
+    transform:
+        translateX(-50%);
+
+    width: min(520px, 88vw);
+
+    padding: 15px;
+
+    background:
+        rgba(0, 15, 25, .82);
+
+    border:
+        1px solid
+        rgba(80, 220, 255, .35);
+
+    box-shadow:
+        0 0 25px
+        rgba(20, 200, 255, .15);
+
+    backdrop-filter:
+        blur(12px);
+
+    z-index: 20;
+
+}
+
+.phone-title {
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 10px;
+
+    opacity: .7;
+
+}
+
+#phoneToken {
+
+    width: 100%;
+
+    padding: 9px;
+
+    margin-bottom: 8px;
+
+    background:
+        rgba(0, 10, 15, .9);
+
+    border:
+        1px solid
+        rgba(80, 220, 255, .25);
+
+    color: #8beaff;
+
+    outline: none;
+
+}
+
+.command-box {
+
+    display: flex;
+
+    gap: 8px;
+
+}
+
+.command-box input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 11px;
+
+    background:
+        rgba(0, 10, 15, .9);
+
+    border:
+        1px solid
+        rgba(80, 220, 255, .3);
+
+    color: #8beaff;
+
+    outline: none;
+
+}
+
+.command-box input::placeholder,
+#phoneToken::placeholder {
+
+    color:
+        rgba(139, 234, 255, .45);
+
+}
+
+.command-box button {
+
+    padding:
+        11px 18px;
+
+    background:
+        rgba(20, 190, 230, .15);
+
+    border:
+        1px solid
+        #29ddff;
+
+    color:
+        #8beaff;
+
+    cursor: pointer;
+
+    letter-spacing: 2px;
+
+}
+
+.command-box button:hover {
+
+    background:
+        rgba(20, 220, 255, .3);
+
+    box-shadow:
+        0 0 15px
+        rgba(40,220,255,.25);
+
+}
+
+.phone-response {
+
+    margin-top: 10px;
+
+    min-height: 15px;
+
+    font-size: 11px;
+
+    letter-spacing: 1px;
+
+    opacity: .75;
+
+}
+
+
+/* ============================================================
+   BOOT MESSAGE
+   ============================================================ */
+
+.boot {
+
+    position: fixed;
+
+    bottom: 20px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 11px;
+
+    letter-spacing: 3px;
+
+    opacity: .65;
+
+}
+
+
+/* ============================================================
+   BOTTOM
+   ============================================================ */
+
+.bottom {
+
+    position: absolute;
+
+    bottom: 8px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    opacity: .45;
+
+}
+
+
+/* ============================================================
+   STATES
+   ============================================================ */
+
+body.listening .core {
+
+    box-shadow:
+
+        0 0 30px #63ffbd,
+
+        0 0 90px
+        rgba(50,255,180,.6),
+
+        inset 0 0 50px
+        rgba(50,255,180,.3);
+
+}
+
+body.thinking .core {
+
+    box-shadow:
+
+        0 0 30px #ffe66d,
+
+        0 0 90px
+        rgba(255,220,60,.6);
+
+}
+
+body.speaking .core {
+
+    box-shadow:
+
+        0 0 35px #d88cff,
+
+        0 0 100px
+        rgba(200,100,255,.7);
+
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media(max-width:900px) {
+
+    .panel {
+
+        display: none;
+
+    }
+
+    .core {
+
+        width: 190px;
+        height: 190px;
+
+    }
+
+    .title {
+
+        font-size: 26px;
+
+    }
+
+    .core-area {
+
+        top: 34%;
+
+    }
+
+    .phone-control {
+
+        bottom: 35px;
+
+        width: 92vw;
+
+    }
+
+    .boot {
+
+        display: none;
+
+    }
+
+    .bottom {
+
+        display: none;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body class="starting">
+
+
+<div class="grid"></div>
+
+<div class="scanline"></div>
+
+
+<!-- ============================================================
+     TOP
+     ============================================================ -->
+
+<div class="topbar">
+
+    <div class="logo">
+        SPARK // AI CORE
+    </div>
+
+    <div class="online">
+        ● SYSTEM ONLINE
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     LEFT PANEL
+     ============================================================ -->
+
+<div class="panel left">
+
+    <div class="panel-title">
+        SYSTEM STATUS
+    </div>
+
+
+    <div class="row">
+
+        <span>AI CORE</span>
+
+        <span
+            class="good"
+            id="ai"
+        >
+            ONLINE
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>OLLAMA</span>
+
+        <span
+            class="good"
+            id="ollama"
+        >
+            ONLINE
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>VOICE</span>
+
+        <span class="good">
+            READY
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>WINDOWS</span>
+
+        <span class="good">
+            READY
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>HAND</span>
+
+        <span
+            class="good"
+            id="hand"
+        >
+            READY
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     CORE
+     ============================================================ -->
+
+<div class="core-area">
+
+    <div class="core"></div>
+
+    <div class="title">
+        SPARK
+    </div>
+
+    <div
+        class="status"
+        id="status"
+    >
+        ENGINE STARTING
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     RIGHT PANEL
+     ============================================================ -->
+
+<div class="panel right">
+
+    <div class="panel-title">
+        ACTIVITY
+    </div>
+
+
+    <div class="row">
+
+        <span>YOU</span>
+
+        <span
+            class="value"
+            id="command"
+        >
+            Waiting...
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>SPARK</span>
+
+        <span
+            class="value"
+            id="response"
+        >
+            Initializing...
+        </span>
+
+    </div>
+
+
+    <div class="row">
+
+        <span>CONTROL</span>
+
+        <span
+            class="value good"
+            id="control"
+        >
+            READY
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     PHONE CONTROL
+     ============================================================ -->
+
+<div class="phone-control">
+
+    <div class="phone-title">
+        PHONE CONTROL // SECURE
+    </div>
+
+    <input
+        type="password"
+        id="phoneToken"
+        placeholder="ACCESS TOKEN"
+        autocomplete="off"
+    >
+
+
+    <div class="command-box">
+
+        <input
+            type="text"
+            id="phoneCommand"
+            placeholder="Command Spark..."
+            autocomplete="off"
+        >
+
+        <button
+            onclick="sendPhoneCommand()"
+        >
+            SEND
+        </button>
+
+    </div>
+
+
+    <div
+        class="phone-response"
+        id="phoneResponse"
+    >
+        SYSTEM READY
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     BOOT
+     ============================================================ -->
+
+<div
+    class="boot"
+    id="boot"
+>
+    POWER CORE // INITIALIZING
+</div>
+
+
+<div class="bottom">
+
+    VOICE // AI // WINDOWS // HAND CONTROL
+
+</div>
+
+
+<script>
+
+
+// ============================================================
+// HUD STATE
+// ============================================================
+
+async function updateHUD() {
+
+    try {
+
+        const response =
+            await fetch("/state");
+
+
+        const data =
+            await response.json();
+
+
+        document.getElementById(
+            "status"
+        ).textContent =
+            data.status;
+
+
+        document.getElementById(
+            "command"
+        ).textContent =
+            data.command;
+
+
+        document.getElementById(
+            "response"
+        ).textContent =
+            data.response;
+
+
+        document.getElementById(
+            "control"
+        ).textContent =
+            data.control;
+
+
+        document.getElementById(
+            "hand"
+        ).textContent =
+            data.hand;
+
+
+        document.body.className =
+            data.status.toLowerCase();
+
+    }
+
+    catch(error) {
+
+        console.log(
+            "HUD connection error"
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// PHONE COMMAND
+// ============================================================
+
+async function sendPhoneCommand() {
+
+    const token =
+        document.getElementById(
+            "phoneToken"
+        ).value.trim();
+
+
+    const command =
+        document.getElementById(
+            "phoneCommand"
+        ).value.trim();
+
+
+    const responseBox =
+        document.getElementById(
+            "phoneResponse"
+        );
+
+
+    if (!token) {
+
+        responseBox.textContent =
+            "ACCESS TOKEN REQUIRED";
+
+        return;
+
+    }
+
+
+    if (!command) {
+
+        responseBox.textContent =
+            "ENTER A COMMAND";
+
+        return;
+
+    }
+
+
+    responseBox.textContent =
+        "TRANSMITTING...";
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/command",
+                {
+
+                    method:
+                        "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json"
+
+                    },
+
+                    body:
+                        JSON.stringify({
+
+                            token:
+                                token,
+
+                            command:
+                                command
+
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        responseBox.textContent =
+            data.response ||
+            "NO RESPONSE";
+
+
+        document.getElementById(
+            "phoneCommand"
+        ).value = "";
+
+
+        updateHUD();
+
+    }
+
+    catch(error) {
+
+        responseBox.textContent =
+            "CONNECTION ERROR";
+
+        console.error(error);
+
+    }
+
+}
+
+
+// ============================================================
+// ENTER KEY
+// ============================================================
+
+document.getElementById(
+    "phoneCommand"
+).addEventListener(
+    "keydown",
+    function(event) {
+
+        if (
+            event.key === "Enter"
+        ) {
+
+            sendPhoneCommand();
+
+        }
+
+    }
+);
+
+
+// ============================================================
+// STARTUP TEXT
+// ============================================================
+
+const bootMessages = [
+
+    "POWER CORE // INITIALIZING",
+
+    "ENERGY FLOW // STABILIZING",
+
+    "NEURAL CORE // ONLINE",
+
+    "VOICE SYSTEM // ONLINE",
+
+    "HAND CONTROL // ONLINE",
+
+    "ALL SYSTEMS // READY"
+
+];
+
+
+let bootIndex = 0;
+
+
+function bootSequence() {
+
+    const boot =
+        document.getElementById(
+            "boot"
+        );
+
+
+    if (
+        bootIndex <
+        bootMessages.length
+    ) {
+
+        boot.textContent =
+            bootMessages[
+                bootIndex
+            ];
+
+        bootIndex++;
+
+    }
+
+}
+
+
+setInterval(
+    bootSequence,
+    350
+);
+
+
+// ============================================================
+// HUD UPDATE
+// ============================================================
+
+setInterval(
+    updateHUD,
+    300
+);
+
+
+updateHUD();
+
+
+</script>
+
+
+</body>
+
+</html>

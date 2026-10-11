@@ -1,0 +1,5 @@
+status = "STARTING"
+last_command = "Waiting..."
+last_response = "Spark is initializing..."
+control_status = "READY"
+hand_status = "READY"
